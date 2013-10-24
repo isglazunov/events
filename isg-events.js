@@ -211,7 +211,7 @@
 
     // AMD / RequireJS
     if (typeof define !== 'undefined' && define.amd) {
-        define(["underscore", "async"], function () {
+        define("isg-events", ["underscore", "async"], function () {
             return Events;
         });
     }
