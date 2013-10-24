@@ -3,14 +3,23 @@
 
 (function(factory){
     
-    // Require
-    if(typeof(require) !== "undefined") {
-        if(typeof(_) == "undefined") _ = require('underscore');
-        if(typeof(async) == "undefined") async = require('async');
+    // AMD / RequireJS
+    if (typeof(define) !== 'undefined' && define.amd) {
+        define(["module"], function (module, _, async) {
+            module.exports = factory;
+        });
+    
+    // Node.js
+    } else if(typeof(module) !== 'undefined' && module.exports) {
+        var _ = require('underscore');
+        var async = require('async');
+        
+        module.exports = factory(_, async);
+        
+    } else { // HTML
+        this.isgEvents = factory;
     }
-    
-    factory(_, async);
-    
+        
 }.call(this, function(_, async){
 
     // Events base by names
@@ -203,17 +212,6 @@
     // Version
     Events.VERSION = '0.0.10';
     
-    // Browser
-    this.Events = Events;
-    
-    // Node.js
-    if(typeof(exports) !== 'undefined' && module.exports) module.exports = Events;
-
-    // AMD / RequireJS
-    if (typeof define !== 'undefined' && define.amd) {
-        define("isg-events", ["underscore", "async"], function () {
-            return Events;
-        });
-    }
+    return Events;
     
 }));
