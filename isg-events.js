@@ -1,5 +1,5 @@
 // isg-events
-// 0.0.10
+// 0.0.11
 
 (function(factory){
     
