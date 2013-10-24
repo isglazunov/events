@@ -1,5 +1,5 @@
 // isg-events
-// 0.0.9
+// 0.0.10
 
 (function(factory){
     
@@ -201,7 +201,7 @@
     };
     
     // Version
-    Events.VERSION = '0.0.9';
+    Events.VERSION = '0.0.10';
     
     // Browser
     this.Events = Events;
