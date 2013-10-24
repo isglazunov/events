@@ -5,5 +5,7 @@
     "dependencies": {
         "underscore": "1.5.2",
         "async": "0.2.9"
+    }, "devDependencies": {
+        "should": "2.0.2"
     }
 }
