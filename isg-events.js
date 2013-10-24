@@ -1,5 +1,5 @@
 // isg-events
-// 0.0.0
+// 0.0.9
 
 (function(factory){
     
@@ -172,13 +172,20 @@
         }
         
         var coreNext = function(handler){
+            var called = false;
             if(handler.next) {
                 var next = handler.next;
                 return function() {
-                    core(next);
+                    if(!called) {
+                        called = true;
+                        core(next);
+                    }
                 }
             } else return function(){
-                if(callback) callback();
+                if(!called && callback) {
+                    called = true;
+                    callback();
+                }
             }
         };
         
@@ -194,7 +201,7 @@
     };
     
     // Version
-    Events.VERSION = '0.0.0';
+    Events.VERSION = '0.0.9';
     
     // Browser
     this.Events = Events;
