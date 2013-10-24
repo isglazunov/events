@@ -1,4 +1,3 @@
-Welcome to the events wiki!
 # isg-events
 0.0.10
 
