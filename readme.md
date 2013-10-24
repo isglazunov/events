@@ -1,3 +1,4 @@
+Welcome to the events wiki!
 # isg-events
 0.0.10
 
@@ -28,7 +29,7 @@ Ability to connect with define.amd added, but not tested. If something is wrong,
 # usage
 It is recommended to use in conjunction with the [underscore](https://github.com/jashkenas/underscore) and [async](https://github.com/caolan/async) modules.
 
-## `new Events;`
+## new Events;
 ```js
 var events = new Events;
 ```
@@ -36,7 +37,7 @@ var events = new Events;
 var container = _.extend({}, new Events);
 ```
 
-## `events.on(name, callback[, options]);`
+## events.on(name, callback[, options]);
 Available options:
 ```js
 {
@@ -89,10 +90,10 @@ Available attributes of self variable:
 }
 ```
 
-## `events.once(name, callback[, options])`
+## events.once(name, callback[, options]);
 Equivalent to calling: `events.on(name, callback, {limit: 1});`
 
-### `events.trigger(name[[, Array arguments], callback];`
+### events.trigger(name[[, Array arguments], callback];
 ```js
 container.trigger("action", function(){
     console.log("trigger");
@@ -106,7 +107,7 @@ trigger
 1
 ```
 
-### `events.off(query)`
+### events.off(query);
 Available query attributes:
 ```js
 {
