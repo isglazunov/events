@@ -8,6 +8,9 @@
 * download from [releases](https://github.com/isglazunov/events/releases)
 
 # require
+Depends on the modules:
+* [underscore](https://github.com/jashkenas/underscore)
+* [async](https://github.com/caolan/async)
 
 ## Node.js
 ```js
@@ -18,15 +21,18 @@ var Events = require("isg-events");
 ```html
 <script src="isg-events.js"></script>
 ```
+```js
+var Events = new isgEvents(_, async);
+```
 
 ### define
 ```js
-define(["isg-events"], function(Events){});
+define(["./isg-events.js"], function(isgEvents){
+    var Events = new isgEvents(_, async);
+});
 ```
-Ability to connect with define.amd added, but not tested. If something is wrong, fix it.
 
-# usage
-It is recommended to use in conjunction with the [underscore](https://github.com/jashkenas/underscore) and [async](https://github.com/caolan/async) modules.
+# Usage
 
 ## new Events;
 ```js
