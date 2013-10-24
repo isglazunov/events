@@ -79,6 +79,15 @@ container.on("action", function(self, next, arg1, arg2){
     }, 50);
 });
 ```
+Available attributes of self variable:
+```js
+{
+    index: Number // Personal index of each handler
+    off: Function // Short-cut method to the handler could disable itself
+    limit: Function // Returns a copy of the options limit
+    // If the first argument is a number or null, the option replaces the limit for him
+}
+```
 
 ## `events.once(name, callback[, options])`
 Equivalent to calling: `events.on(name, callback, {limit: 1});`
@@ -118,3 +127,6 @@ container.off({
 Disable all event handlers "action"
 
 # versions
+
+## 0.0.9
+The basic functionality.
