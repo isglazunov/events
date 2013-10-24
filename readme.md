@@ -19,7 +19,7 @@ var Events = require("isg-events");
 <script src="isg-events.js"></script>
 ```
 
-### `define`
+### define
 ```js
 define(["isg-events"], function(Events){});
 ```
