@@ -9,5 +9,8 @@ Tests performed without mistake-if after a few seconds the console will display 
 ### Node.js
 `node server.js`
 
-### Browser
-`google-chrome index.html`
+### define.amd
+`google-chrome amd.html`
+
+### HTML
+`google-chrome html.html`
