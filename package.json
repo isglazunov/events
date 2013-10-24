@@ -1,6 +1,6 @@
 {
     "name": "isg-events",
-    "version": "0.0.10",
+    "version": "0.0.11",
     "keywords": ["event", "events", "underscore", "async", "sync", "on", "once", "trigger"],
     "dependencies": {
         "underscore": "1.5.2",

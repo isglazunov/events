@@ -1,5 +1,5 @@
 # isg-events
-0.0.10
+0.0.11
 
 # install
 
@@ -132,7 +132,11 @@ container.off({
 ```
 Disable all event handlers "action"
 
-# versions
+# Versions
+## 0.0.11
+New requiring methods.
+Some fixes.
+
 ## 0.0.10
 Bigger readme.
 Some fixes.
