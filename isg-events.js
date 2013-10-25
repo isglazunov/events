@@ -3,6 +3,9 @@
 
 (function(factory){
     
+    // Version
+    factory.VERSION = '0.0.11';
+    
     // AMD / RequireJS
     if (typeof(define) !== 'undefined' && define.amd) {
         define(["module"], function (module) {
@@ -11,10 +14,7 @@
     
     // Node.js
     } else if(typeof(module) !== 'undefined' && module.exports) {
-        var _ = require('underscore');
-        var async = require('async');
-        
-        module.exports = factory(_, async);
+        module.exports = factory;
         
     } else { // HTML
         this.isgEvents = factory;
@@ -211,9 +211,6 @@
             if(callback) callback();
         }
     };
-    
-    // Version
-    Events.VERSION = '0.0.11';
     
     return Events;
     
