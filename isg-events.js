@@ -69,6 +69,7 @@
             prev: undefined,
             next: undefined
         };
+        if(!_.isObject(this._events)) this._events = {};
         if(this._events[name]) { // If list 
             event.prev = this._events[name].last;
             this._events[name].last.next = event;
@@ -141,6 +142,7 @@
             }
         };
         
+        if(!_.isObject(this._events)) this._events = {};
         if(_.isUndefined(options.name)) {
             if(_.isUndefined(options.context) && _.isUndefined(options.callback) && _.isUndefined(options.sync) && _.isUndefined(options.limit)) self._events = {};
             else offEvent(options.name);
@@ -201,6 +203,7 @@
             }
         };
         
+        if(!_.isObject(this._events)) this._events = {};
         if(self._events[name]) {
             if(name != self._eventsAllEventKey) {
                 self.trigger(self._eventsAllEventKey, [name, args], function(){
