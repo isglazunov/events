@@ -37,7 +37,7 @@
     var syncDefault = false;
     var selfDefault = false;
     var limitDefault = null;
-    var allEventKey = "*";
+    var allEventName = "*";
     
     // Global index all handlers
     var index = 0;
@@ -46,8 +46,12 @@
     var Events = function(){
         this._eventsSync = syncDefault;
         this._eventsSelf = selfDefault;
-        this._eventsAllEventKey = allEventKey;
+        this._eventsAllEventName = allEventName;
         this._events = {};
+    };
+    
+    var getAllEventName = function(self) {
+        return _.isString(self._eventsAllEventName) self._eventsAllEventName : allEventName
     };
     
     // Create handler
@@ -205,8 +209,8 @@
         
         if(!_.isObject(this._events)) this._events = {};
         if(self._events[name]) {
-            if(name != self._eventsAllEventKey) {
-                self.trigger(self._eventsAllEventKey, [name, args], function(){
+            if(getAllEventName(self) != name) {
+                self.trigger(getAllEventName(self), [name, args], function(){
                     core(self._events[name]);
                 })
             } else core(self._events[name]);
