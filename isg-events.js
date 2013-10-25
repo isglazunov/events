@@ -5,7 +5,7 @@
     
     // AMD / RequireJS
     if (typeof(define) !== 'undefined' && define.amd) {
-        define(["module"], function (module, _, async) {
+        define(["module"], function (module) {
             module.exports = factory;
         });
     
