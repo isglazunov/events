@@ -42,8 +42,6 @@
     // Global index all handlers
     var index = 0;
     
-    // Public settings
-    
     // Prototyping
     var Events = function(){
         this._eventsSync = syncDefault;
@@ -52,6 +50,7 @@
         this._events = {};
     };
     
+    // Create handler
     Events.prototype.on = function(name, callback, custom){
         if(!_.isObject(custom)) custom = {};
         var options = {
@@ -81,10 +80,12 @@
         return this;
     };
     
+    // Create once handler
     Events.prototype.once = function(name, callback, options){
         return this.on(name, callback, (options? _.extend(options, {limit: 1}) : {limit: 1}) );
     };
     
+    // Delete handler
     var off = function(self, name, handler){
         if(!handler.prev) { // first
             if(!handler.next) { // last
@@ -107,6 +108,7 @@
         }
     };
     
+    // Delete handlers
     Events.prototype.off = function(query, callback){
         var self = this;
         
@@ -148,6 +150,7 @@
         }
     };
     
+    // Trigger event handlers
     Events.prototype.trigger = function(name){
         var self = this;
         var args = _.isArray(arguments[1]) || _.isArguments(arguments[1])? arguments[1] : [];
