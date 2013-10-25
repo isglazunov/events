@@ -1,1 +1,1 @@
-require("./test.js")();
+require('./test.js')(require('underscore'), require('async'));
