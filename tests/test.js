@@ -64,11 +64,12 @@ if (typeof(define) !== 'undefined' && define.amd) {
         constructor(_, isgEvents(_, async))();
     });
 } else if(typeof(module) !== 'undefined' && module.exports) {
-    if(!_ && typeof(require) !== 'undefined') var _ = require('underscore');
-    if(!Events && typeof(require) !== 'undefined') var Events = require('../isg-events.js');
-    if(typeof(require) !== 'undefined') require('should');
+    var _ = require('underscore');
+    var async = require('async');
+    var isgEvents = require('../isg-events.js');
+    require('should');
     
-    module.exports = constructor(_, Events);
+    module.exports = constructor(_, isgEvents(_, async));
 } else {
     constructor(_, isgEvents(_, async))();
 }
