@@ -51,7 +51,7 @@
     };
     
     var getAllEventName = function(self) {
-        return _.isString(self._isgEventsAllEventName) self._isgEventsAllEventName : allEventName
+        return _.isString(self._isgEventsAllEventName)? self._isgEventsAllEventName : allEventName
     };
     
     // Create handler
