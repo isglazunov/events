@@ -9,12 +9,13 @@
 
 # require
 Depends on the modules:
-* [underscore](https://github.com/jashkenas/underscore)
-* [async](https://github.com/caolan/async)
+* [underscore@1.5.2](https://github.com/jashkenas/underscore)
+* [async@0.2.9](https://github.com/caolan/async)
 
 ## Node.js
 ```js
-var Events = require("isg-events");
+var isgEvents = require('isg-events');
+var Events = isgEvents(require('underscore'), require('async'));
 ```
 
 ## Browser
@@ -27,7 +28,7 @@ var Events = new isgEvents(_, async);
 
 ### define
 ```js
-define(["./isg-events.js"], function(isgEvents){
+define(['./isg-events.js'], function(isgEvents){
     var Events = new isgEvents(_, async);
 });
 ```
@@ -38,8 +39,10 @@ define(["./isg-events.js"], function(isgEvents){
 ```js
 var events = new Events;
 ```
+or
 ```js
-var container = _.extend({}, new Events);
+var MyEvents = function(){};
+MyEvents.prototype = new Events;
 ```
 
 ## events.on(name, callback[, options]);
