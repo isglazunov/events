@@ -1,10 +1,10 @@
-// isg-events
-// 0.0.11
+// isg-events@0.0.12
+// https://github.com/isglazunov/events
 
 (function(factory){
     
     // Version
-    factory.VERSION = '0.0.11';
+    factory.VERSION = '0.0.12';
     
     // AMD / RequireJS
     if (typeof(define) !== 'undefined' && define.amd) {

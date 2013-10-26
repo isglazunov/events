@@ -1,5 +1,4 @@
-# isg-events
-0.0.11
+# isg-events@0.0.12
 
 # install
 
@@ -136,6 +135,11 @@ container.off({
 Disable all event handlers "action"
 
 # Versions
+## 0.0.12
+New requiring method for Node.js.
+New configuration prefix. ~~_events~~ to _isgEvents.
+Some fixes and cleaning.
+
 ## 0.0.11
 New requiring methods.
 Some fixes.
