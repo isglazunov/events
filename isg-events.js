@@ -44,14 +44,14 @@
     
     // Prototyping
     var Events = function(){
-        this._eventsSync = syncDefault;
-        this._eventsSelf = selfDefault;
-        this._eventsAllEventName = allEventName;
-        this._events = {};
+        this._isgEventsSync = syncDefault;
+        this._isgEventsSelf = selfDefault;
+        this._isgEventsAllEventName = allEventName;
+        this._isgEvents = {};
     };
     
     var getAllEventName = function(self) {
-        return _.isString(self._eventsAllEventName) self._eventsAllEventName : allEventName
+        return _.isString(self._isgEventsAllEventName) self._isgEventsAllEventName : allEventName
     };
     
     // Create handler
@@ -59,8 +59,8 @@
         if(!_.isObject(custom)) custom = {};
         var options = {
             context: custom.context? custom.context : this,
-            sync: _.isBoolean(custom.sync)? custom.sync : _.isBoolean(this._eventsSync)? this._eventsSync : syncDefault,
-            self: _.isBoolean(custom.self)? custom.self : _.isBoolean(this._eventsSelf)? this._eventsSelf : selfDefault,
+            sync: _.isBoolean(custom.sync)? custom.sync : _.isBoolean(this._isgEventsSync)? this._isgEventsSync : syncDefault,
+            self: _.isBoolean(custom.self)? custom.self : _.isBoolean(this._isgEventsSelf)? this._isgEventsSelf : selfDefault,
             limit: _.isNumber(custom.limit) || _.isNull(custom.limi)? custom.limit : limitDefault
         };
         var event = {
@@ -73,14 +73,14 @@
             prev: undefined,
             next: undefined
         };
-        if(!_.isObject(this._events)) this._events = {};
-        if(this._events[name]) { // If list 
-            event.prev = this._events[name].last;
-            this._events[name].last.next = event;
-            this._events[name].last = event;
+        if(!_.isObject(this._isgEvents)) this._isgEvents = {};
+        if(this._isgEvents[name]) { // If list 
+            event.prev = this._isgEvents[name].last;
+            this._isgEvents[name].last.next = event;
+            this._isgEvents[name].last = event;
         } else {;
             event.last = event;
-            this._events[name] = event;
+            this._isgEvents[name] = event;
         } 
         return this;
     };
@@ -94,16 +94,16 @@
     var off = function(self, name, handler){
         if(!handler.prev) { // first
             if(!handler.next) { // last
-                delete self._events[name];
+                delete self._isgEvents[name];
             } else { // not last
-                self._events[name] = handler.next;
+                self._isgEvents[name] = handler.next;
                 handler.next.prev = undefined;
                 handler.next.last = handler.last;
                 handler.next = undefined;
             }
         } else { // not first
             if(!handler.next) { // last
-                self._events[name].last = handler.prev;
+                self._isgEvents[name].last = handler.prev;
                 handler.prev.next = undefined;
                 handler.prev = undefined;
             } else { // not last
@@ -136,22 +136,22 @@
             off(self, name, handler);
         };
         var offEvent = function(name){
-            if(self._events[name]) {
-                offHandler(name, self._events[name]);
+            if(self._isgEvents[name]) {
+                offHandler(name, self._isgEvents[name]);
             }
         };
         var offEvents = function(){
-            for(var name in self._events) {
+            for(var name in self._isgEvents) {
                 offEvent(name);
             }
         };
         
-        if(!_.isObject(this._events)) this._events = {};
+        if(!_.isObject(this._isgEvents)) this._isgEvents = {};
         if(_.isUndefined(options.name)) {
-            if(_.isUndefined(options.context) && _.isUndefined(options.callback) && _.isUndefined(options.sync) && _.isUndefined(options.limit)) self._events = {};
+            if(_.isUndefined(options.context) && _.isUndefined(options.callback) && _.isUndefined(options.sync) && _.isUndefined(options.limit)) self._isgEvents = {};
             else offEvent(options.name);
         } else {
-            if(self._events[options.name] && _.isUndefined(options.context) && _.isUndefined(options.callback) && _.isUndefined(options.sync) && _.isUndefined(options.limit)) delete self._events[options.name];
+            if(self._isgEvents[options.name] && _.isUndefined(options.context) && _.isUndefined(options.callback) && _.isUndefined(options.sync) && _.isUndefined(options.limit)) delete self._isgEvents[options.name];
             else offEvents();
         }
     };
@@ -207,13 +207,13 @@
             }
         };
         
-        if(!_.isObject(this._events)) this._events = {};
-        if(self._events[name]) {
+        if(!_.isObject(this._isgEvents)) this._isgEvents = {};
+        if(self._isgEvents[name]) {
             if(getAllEventName(self) != name) {
                 self.trigger(getAllEventName(self), [name, args], function(){
-                    core(self._events[name]);
+                    core(self._isgEvents[name]);
                 })
-            } else core(self._events[name]);
+            } else core(self._isgEvents[name]);
         } else {
             if(callback) callback();
         }
