@@ -1,12 +1,13 @@
 # isg-events@0.0.12
+Synchronous and asynchronous cross-platform library for organizing events.
 
-# install
+# Install
 
 * NPM `npm install isg-events`
 * GIT `git clone https://github.com/isglazunov/events.git`
 * download from [releases](https://github.com/isglazunov/events/releases)
 
-# require
+# Require
 Depends on the modules:
 * [underscore@1.5.2](https://github.com/jashkenas/underscore)
 * [async@0.2.9](https://github.com/caolan/async)
@@ -85,7 +86,7 @@ container.on("action", function(self, next, arg1, arg2){
         console.log("2");
         next();
     }, 50);
-});
+}, {self: true});
 ```
 Available attributes of self variable:
 ```js
@@ -100,7 +101,7 @@ Available attributes of self variable:
 ## events.once(name, callback[, options]);
 Equivalent to calling: `events.on(name, callback, {limit: 1});`
 
-### events.trigger(name[[, Array arguments], callback];
+## events.trigger(name[[, Array arguments], callback]);
 ```js
 container.trigger("action", function(){
     console.log("trigger");
@@ -114,7 +115,7 @@ trigger
 1
 ```
 
-### events.off(query);
+## events.off(query);
 Available query attributes:
 ```js
 {
@@ -134,19 +135,19 @@ container.off({
 ```
 Disable all event handlers "action"
 
-# Versions
-## 0.0.12
+## Versions
+### 0.0.12
 New requiring method for Node.js.
 New configuration prefix. ~~_events~~ to _isgEvents.
 Some fixes and cleaning.
 
-## 0.0.11
+### 0.0.11
 New requiring methods.
 Some fixes.
 
-## 0.0.10
+### 0.0.10
 Bigger readme.
 Some fixes.
 
-## 0.0.9
+### 0.0.9
 The basic functionality.
