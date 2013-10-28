@@ -26,7 +26,7 @@ var Events = isgEvents(require('underscore'), require('async'));
 var Events = new isgEvents(_, async);
 ```
 
-### define
+#### define
 ```js
 define(['./isg-events.js'], function(isgEvents){
     var Events = new isgEvents(_, async);
