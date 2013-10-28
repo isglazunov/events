@@ -1,24 +1,24 @@
 # isg-events@0.0.12
 Synchronous and asynchronous cross-platform library for organizing events.
 
-# Install
+## Install
 
 * NPM `npm install isg-events`
 * GIT `git clone https://github.com/isglazunov/events.git`
 * download from [releases](https://github.com/isglazunov/events/releases)
 
-# Require
+## Require
 Depends on the modules:
 * [underscore@1.5.2](https://github.com/jashkenas/underscore)
 * [async@0.2.9](https://github.com/caolan/async)
 
-## Node.js
+### Node.js
 ```js
 var isgEvents = require('isg-events');
 var Events = isgEvents(require('underscore'), require('async'));
 ```
 
-## Browser
+### Browser
 ```html
 <script src="isg-events.js"></script>
 ```
@@ -33,9 +33,9 @@ define(['./isg-events.js'], function(isgEvents){
 });
 ```
 
-# Usage
+## Usage
 
-## new Events;
+### new Events;
 ```js
 var events = new Events;
 ```
@@ -45,7 +45,7 @@ var MyEvents = function(){};
 MyEvents.prototype = new Events;
 ```
 
-## events.on(name, callback[, options]);
+### events.on(name, callback[, options]);
 Available options:
 ```js
 {
@@ -56,7 +56,7 @@ Available options:
 }
 ```
 
-### Asynchronous event
+#### Asynchronous event
 The following will be called only after a call `next`.
 ```js
 container.on("action", function(next, arg1, arg2){
@@ -67,7 +67,7 @@ container.on("action", function(next, arg1, arg2){
 });
 ```
 
-### Synchronous event.
+#### Synchronous event.
 The function `next` will be called automatically after the call handler.
 ```js
 container.on("action", function(arg1, arg2){
@@ -77,7 +77,7 @@ container.on("action", function(arg1, arg2){
 }, {sync: true});
 ```
 
-### Access to the handler.
+#### Access to the handler.
 The handler described below exclude yourself from the list of event handlers immediately after the call.
 ```js
 container.on("action", function(self, next, arg1, arg2){
@@ -98,10 +98,10 @@ Available attributes of self variable:
 }
 ```
 
-## events.once(name, callback[, options]);
+### events.once(name, callback[, options]);
 Equivalent to calling: `events.on(name, callback, {limit: 1});`
 
-## events.trigger(name[[, Array arguments], callback]);
+### events.trigger(name[[, Array arguments], callback]);
 ```js
 container.trigger("action", function(){
     console.log("trigger");
@@ -115,7 +115,7 @@ trigger
 1
 ```
 
-## events.off(query);
+### events.off(query);
 Available query attributes:
 ```js
 {
