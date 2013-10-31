@@ -1,11 +1,18 @@
 {
+    "author": {
+        "name": "Ivan Sergey Glazunov",
+        "email": "isglazunov@gmail.com",
+        "url": "https://github.com/isglazunov"
+    }, 
     "name": "isg-events",
-    "version": "0.0.12",
-    "keywords": ["event", "events", "underscore", "async", "sync", "on", "once", "trigger"],
+    "version": "0.1.0",
+    "keywords": ["event", "events", "underscore", "async", "sync", "on", "once", "trigger", "off", "isg"],
     "dependencies": {
-        "underscore": "1.5.2",
+        "lodash": "2.2.1",
         "async": "0.2.9"
-    }, "devDependencies": {
-        "should": "2.0.2"
+    },
+    "devDependencies": {
+        "should": "2.0.2",
+        "mocha": "1.13.0"
     }
 }

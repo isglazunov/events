@@ -1,1 +1,3 @@
-require('./test.js')(require('underscore'), require('async'));
+require('should');
+global.isgEvents = require('../isg-events.js');
+require('./test.js');
