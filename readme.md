@@ -1,39 +1,52 @@
-# isg-events@0.0.12
+# isg-events@0.1.0
 Synchronous and asynchronous cross-platform library for organizing events.
 
 ## Install
 
 * NPM `npm install isg-events`
-* GIT `git clone https://github.com/isglazunov/events.git`
-* download from [releases](https://github.com/isglazunov/events/releases)
+* GIT `git clone https://github.com/isglazunov/isg-events.git`
+* download from [releases](https://github.com/isglazunov/isg-events/releases)
 
 ## Require
 Depends on the modules:
-* [underscore@1.5.2](https://github.com/jashkenas/underscore)
+* [lodash@2.2.1](https://github.com/lodash/lodash)
 * [async@0.2.9](https://github.com/caolan/async)
 
-### Node.js
-```js
-var isgEvents = require('isg-events');
-var Events = isgEvents(require('underscore'), require('async'));
-```
+Indirect dependency
+* [isg-connector@0.0.2](https://github.com/isglazunov/isg-connector)
 
-### Browser
+The module can be connected using all supported module [isg-connector@0.0.2](https://github.com/isglazunov/isg-connector) methods.
+
+### window (Browser)
 ```html
 <script src="isg-events.js"></script>
-```
-```js
-var Events = new isgEvents(_, async);
+<script>
+    var Events = isgEvents.Events;
+</script>
 ```
 
-#### define
+### define (AMD/Requirejs)
 ```js
-define(['./isg-events.js'], function(isgEvents){
-    var Events = new isgEvents(_, async);
+define(['isg-events.js'], function(isgEvents){
+    var Events = isgEvents.Events;
 });
 ```
 
+### require (Node.js)
+```js
+var isgEvents = require('isg-events');
+var Events = isgEvents.Events;
+```
+
 ## Usage
+
+### Available variables
+
+#### isgEvents.version
+Contains the current version of the module.
+
+#### isgEvents.dependencies
+Contains links to the required modules.
 
 ### new Events;
 ```js
@@ -136,6 +149,10 @@ container.off({
 Disable all event handlers "action"
 
 ## Versions
+
+### 0.1.0
+To connect the module used [isg-connector@0.0.2](https://github.com/isglazunov/isg-connector).
+
 ### 0.0.12
 New requiring method for Node.js.
 New configuration prefix. ~~_events~~ to _isgEvents.

@@ -1,97 +1,33 @@
-// isg-events@0.0.12
-// https://github.com/isglazunov/events
+// isg-events@0.1.0
+// https://github.com/isglazunov/isg-events
 
 (function(factory){
     
-    // Version
-    factory.VERSION = '0.0.12';
+    // isg-connector@0.0.2
+    (function(b,constructor,c,d){if(typeof(window)!=='undefined'){var e=[];for(var f in d){e.push(window[d[f]])}this[b]=constructor.apply(null,e)}if(typeof(define)!=='undefined'&&define.amd){var e=['module'];for(var f in c){e.push(c[f])}define(e,function(a){a.exports=constructor.apply(null,[].slice.call(arguments,1))})}if(typeof(module)!=='undefined'&&module.exports&&typeof(require)=='function'){var e=[];for(var f in c){e.push(require(c[f]))}module.exports=constructor.apply(null,e)}return constructor})(
+        'isgEvents', factory, ['lodash', 'async'], ['_', 'async']
+    );
     
-    // AMD / RequireJS
-    if (typeof(define) !== 'undefined' && define.amd) {
-        define(["module"], function (module) {
-            module.exports = factory;
-        });
-    
-    // Node.js
-    } else if(typeof(module) !== 'undefined' && module.exports) {
-        module.exports = factory;
-        
-    } else { // HTML
-        this.isgEvents = factory;
-    }
-        
 }.call(this, function(_, async){
-
-    // Events base by names
-    // Use a doubly linked list.
-    /* { eventName: {
-        last: eventHandler,
-        prev: undefined,
-        next: {
-            prev: eventHandler,
-            next: eventHandler
+    
+    var isgEvents = {
+        index: 0,
+        version: '0.1.0',
+        dependencies: {
+            _: _,
+            async: async
         }
-    } } */
+    };
     
-    // Default variables
-    var syncDefault = false;
-    var selfDefault = false;
-    var limitDefault = null;
-    var allEventName = "*";
-    
-    // Global index all handlers
-    var index = 0;
-    
-    // Prototyping
-    var Events = function(){
-        this._isgEventsSync = syncDefault;
-        this._isgEventsSelf = selfDefault;
-        this._isgEventsAllEventName = allEventName;
+    isgEvents.Events = function(){
+        this._isgEventsSync = false;
+        this._isgEventsSelf = false;
+        this._isgEventsAllEventName = '*';
+        this._isgEventsLimit = null;
         this._isgEvents = {};
     };
     
-    var getAllEventName = function(self) {
-        return _.isString(self._isgEventsAllEventName)? self._isgEventsAllEventName : allEventName
-    };
-    
-    // Create handler
-    Events.prototype.on = function(name, callback, custom){
-        if(!_.isObject(custom)) custom = {};
-        var options = {
-            context: custom.context? custom.context : this,
-            sync: _.isBoolean(custom.sync)? custom.sync : _.isBoolean(this._isgEventsSync)? this._isgEventsSync : syncDefault,
-            self: _.isBoolean(custom.self)? custom.self : _.isBoolean(this._isgEventsSelf)? this._isgEventsSelf : selfDefault,
-            limit: _.isNumber(custom.limit) || _.isNull(custom.limi)? custom.limit : limitDefault
-        };
-        var event = {
-            index: index++,
-            callback: callback,
-            context: options.context,
-            sync: options.sync,
-            self: options.self,
-            limit: options.limit,
-            prev: undefined,
-            next: undefined
-        };
-        if(!_.isObject(this._isgEvents)) this._isgEvents = {};
-        if(this._isgEvents[name]) { // If list 
-            event.prev = this._isgEvents[name].last;
-            this._isgEvents[name].last.next = event;
-            this._isgEvents[name].last = event;
-        } else {;
-            event.last = event;
-            this._isgEvents[name] = event;
-        } 
-        return this;
-    };
-    
-    // Create once handler
-    Events.prototype.once = function(name, callback, options){
-        return this.on(name, callback, (options? _.extend(options, {limit: 1}) : {limit: 1}) );
-    };
-    
-    // Delete handler
-    var off = function(self, name, handler){
+    isgEvents.off = function(self, name, handler){
         if(!handler.prev) { // first
             if(!handler.next) { // last
                 delete self._isgEvents[name];
@@ -113,8 +49,41 @@
         }
     };
     
-    // Delete handlers
-    Events.prototype.off = function(query, callback){
+    isgEvents.Events.prototype.on = function(name, callback, options){
+        var options = _.isObject(options)? options : {}
+        _.defaults(options, {
+            context: this,
+            sync: this._isgEventsSync,
+            self: this._isgEventsSelf,
+            limit: this._isgEventsLimit
+        });
+        var event = {
+            index: isgEvents.index++,
+            callback: callback,
+            context: options.context,
+            sync: options.sync,
+            self: options.self,
+            limit: options.limit,
+            prev: undefined,
+            next: undefined
+        };
+        if(!_.isObject(this._isgEvents)) this._isgEvents = {};
+        if(this._isgEvents[name]) { // If list 
+            event.prev = this._isgEvents[name].last;
+            this._isgEvents[name].last.next = event;
+            this._isgEvents[name].last = event;
+        } else {;
+            event.last = event;
+            this._isgEvents[name] = event;
+        } 
+        return this;
+    };
+    
+    isgEvents.Events.prototype.once = function(name, callback, options){
+        return this.on(name, callback, (options? _.extend(options, {limit: 1}) : {limit: 1}) );
+    };
+    
+    isgEvents.Events.prototype.off = function(query, callback){
         var self = this;
         
         var options = {
@@ -133,7 +102,7 @@
             if(!_.isUndefined(options.self) && handler.self !== options.sync) return;
             if(!_.isUndefined(options.limit) && handler.limit !== options.limit) return;
             
-            off(self, name, handler);
+            isgEvents.off(self, name, handler);
         };
         var offEvent = function(name){
             if(self._isgEvents[name]) {
@@ -156,8 +125,7 @@
         }
     };
     
-    // Trigger event handlers
-    Events.prototype.trigger = function(name){
+    isgEvents.Events.prototype.trigger = function(name){
         var self = this;
         var args = _.isArray(arguments[1]) || _.isArguments(arguments[1])? arguments[1] : [];
         var callback = _.isFunction(arguments[1])? arguments[1] : _.isFunction(arguments[2])? arguments[2] : function(){};
@@ -178,9 +146,10 @@
                         return handler.limit;
                     },
                     off: function(){
-                        off(self, name, handler);
+                        isgEvents.off(self, name, handler);
                     },
                 }]);
+                
                 if(!handler.sync) _args.push([next]);
                 _args.push(args);
                 
@@ -209,8 +178,8 @@
         
         if(!_.isObject(this._isgEvents)) this._isgEvents = {};
         if(self._isgEvents[name]) {
-            if(getAllEventName(self) != name) {
-                self.trigger(getAllEventName(self), [name, args], function(){
+            if(self._isgEventsAllEventName != name) {
+                self.trigger(self._isgEventsAllEventName, [name, args], function(){
                     core(self._isgEvents[name]);
                 })
             } else core(self._isgEvents[name]);
@@ -219,6 +188,5 @@
         }
     };
     
-    return Events;
-    
+    return isgEvents;
 }));

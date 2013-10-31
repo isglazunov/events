@@ -1,10 +1,25 @@
 <html>
     <head>
-        <script src="./jquery.js"></script>
-        <script src="../node_modules/underscore/underscore.js"></script>
+        <meta charset="utf-8">
+        
+        <script src="../node_modules/lodash/lodash.js"></script>
         <script src="../node_modules/async/lib/async.js"></script>
         <script src="../node_modules/should/should.js"></script>
+        
+        <link rel="stylesheet" href="../node_modules/mocha/mocha.css" />
+        <script src="../node_modules/mocha/mocha.js"></script>
+        <script> mocha.setup('bdd'); </script>
+        
         <script src="../isg-events.js"></script>
         <script src="./test.js"></script>
+        
+        <script> onload = function(){
+            mocha.checkLeaks();
+            mocha.globals(['jQuery']);
+            mocha.run();
+        }; </script>
     </head>
+    <body>
+        <div id="mocha"></div>
+    </body>
 </html>

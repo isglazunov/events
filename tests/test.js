@@ -1,7 +1,7 @@
-var constructor = function(_, Events) {
-    return function(){
+describe('isg-events', function(){
+    it('shoult be equal', function(done){
         var results = [];
-        var container = _.extend({}, new Events);
+        var container = new isgEvents.Events;
         if(typeof(window) !== 'undefined') window.container = container;
         
         container.on("*", function(next, event){
@@ -54,22 +54,7 @@ var constructor = function(_, Events) {
         
         setTimeout(function(){
             results.should.eql(['action', 0, 1, 123, 2, "context", 'again', 'action', 0, undefined, 'done']);
-            console.log("done")
+            done();
         }, 500);
-    }
-}
-
-if (typeof(define) !== 'undefined' && define.amd) {
-    define(["../isg-events.js"], function (isgEvents) {
-        constructor(_, isgEvents(_, async))();
     });
-} else if(typeof(module) !== 'undefined' && module.exports) {
-    var _ = require('underscore');
-    var async = require('async');
-    var isgEvents = require('../isg-events.js');
-    require('should');
-    
-    module.exports = constructor(_, isgEvents(_, async));
-} else {
-    constructor(_, isgEvents(_, async))();
-}
+});
